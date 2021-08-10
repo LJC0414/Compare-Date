@@ -11,9 +11,9 @@ if (inputTime.isSame(nowTime)){
     console.log('Input time is now');
 }
 else if (inputTime.isBefore(nowTime)){
-    console.log('Input time is in the past')
+    console.log('Input time is in the past');
 }
 else if (inputTime.isAfter(nowTime)){
-    console.log('Input time is in the future')
+    console.log('Input time is in the future');
 }
 
