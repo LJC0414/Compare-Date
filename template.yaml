@@ -1,0 +1,33 @@
+Transform: AWS::Serverless-2016-10-31
+
+Description: Test deploy lambda api gateway.
+
+Resources:
+  TestApi:   
+    Type: AWS::Serverless::Api
+    Properties:
+      Cors: 
+        AllowMethods: "'POST,GET,PUT,DELETE,OPTIONS'"
+        AllowHeaders: "'X-Forwarded-For,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
+      Description: Test api by Jiacheng
+      StageName: dev
+  
+  TestCompareDateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Description: Test lambda function to compare date.
+      Events: 
+        PostRequestSample:
+          Type: Api
+          Properties:
+            RestApiId: TestApi
+            Path: /
+            Method: POST
+      Handler: index.handler
+      MemorySize: 128
+      Role: arn:aws:iam::872401033045:role/callia-admin-lambda-function-executor-role
+      Runtime: nodejs14.x
+      Timeout: 15
+
